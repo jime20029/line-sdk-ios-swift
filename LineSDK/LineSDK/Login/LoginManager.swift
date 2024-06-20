@@ -82,12 +82,6 @@ public class LoginManager {
         lock.lock()
         defer { lock.unlock() }
 
-        guard !setup else {
-            Log.assertionFailure("Trying to set configuration multiple times is not permitted.")
-            return
-        }
-        defer { setup = true }
-
         let config = LoginConfiguration(channelID: channelID, universalLinkURL: universalLinkURL)
         LoginConfiguration._shared = config
         AccessTokenStore._shared = AccessTokenStore(configuration: config)
